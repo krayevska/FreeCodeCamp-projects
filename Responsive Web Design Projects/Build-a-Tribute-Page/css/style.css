@@ -1,0 +1,27 @@
+
+#main {
+  margin-top: 50px;
+}
+
+#image{
+   display: block;
+   margin: auto;
+   max-width: 100%;
+   height: auto;
+   }
+
+.text {
+   text-align: center;
+   }
+
+#tribute-info{
+  margin-left: 250px;
+  margin-right: 250px; 
+  }
+
+#img-caption, blockquote{
+  font-style: italic;
+}
+
+
+
