@@ -3,5 +3,5 @@
 <br>
 list of completed projects:
 <br>
-1 [Build a Tribute Page](https://codepen.io/krayevska/full/MqQNPJ/)
-2 [Build a survey form](https://codepen.io/krayevska/full/wEYVJz/)
+1 [Build a Tribute Page](https://codepen.io/krayevska/full/MqQNPJ/)<br>
+2 [Build a survey form](https://codepen.io/krayevska/full/wEYVJz/)<br>
