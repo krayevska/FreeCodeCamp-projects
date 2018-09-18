@@ -1,5 +1,5 @@
 Responsive Web Design Projects - [Build a Survey Form](https://learn.freecodecamp.org/responsive-web-design/responsive-web-design-projects/build-a-survey-form/)
-<br>
+<br><br>
 **Objective:** Build a CodePen.io app that is functionally similar to this: https://codepen.io/freeCodeCamp/full/VPaoNP.<br>
 Fulfill the below user stories and get all of the tests to pass. Give it your own personal style.<br>
 You can use HTML, JavaScript, and CSS to complete this project.<br>
