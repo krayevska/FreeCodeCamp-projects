@@ -1,0 +1,108 @@
+body {
+  margin-top: 70px;
+  background-color: #98FF98;
+  text-align: center;
+  font-family: sans-serif;
+  min-width: 350px;
+  }
+
+#description{
+  font-size: 20px;
+  margin-top: 40px;
+}
+
+input, select,textarea, button {
+ border-radius: 10px; 
+}
+
+#form-container{
+  width: 75%;
+  border: 5px solid white;
+  border-radius: 10px;
+  margin: auto;
+  margin-top:50px;
+  width: 900px;
+}
+
+.labels {
+  display: inline-block;
+  text-align: right;
+  vertical-align: top;
+  padding: 5px;
+  width: 40%;
+  }
+
+.field {
+  display: inline-block;
+  text-align: left;
+  width: 48%;
+  vertical-align: middle;
+  }
+
+input[type="checkbox"], input[type="radio"]{
+  float: left;
+  margin-right: 8px;
+  }
+
+li {
+  padding: 4px;
+  }
+
+ul {
+  position: relative;
+  display: block;
+  padding-left: 0px;
+  padding-top: 0px;
+  margin-left: 0px;
+  margin-top: 0px;
+  }
+
+.row{
+  padding: 7px;
+}
+
+.input-field{
+  height: 25px;
+  width: 250px;
+  }
+
+.dropdown{
+  height: 33px;
+  width: 150px;
+  }
+
+#submit{
+  width: 130px;
+  height: 35px;
+  margin-top: 5px;
+  margin-bottom: 20px;
+}
+
+#numberYOR, #number{
+  width: 50px;
+}
+
+@media screen and (max-width: 750px) {
+  .labels {
+    width: 100%;
+    text-align: left;
+  }
+  .field {
+    width: 100%;
+    float: left;
+    }
+  .input-field {
+    width: 100%;
+  }
+  select {
+    width: 100%;
+  }
+  button {
+    width: 100%;
+  }
+  #form-container{
+    width: 100%
+  }
+ }
+
+
