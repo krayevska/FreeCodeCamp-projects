@@ -1,0 +1,136 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+html, body {
+  font-family: 'Courier', monospace;
+  text-align: center;
+}
+
+#headerLogo{
+  display: block;
+  width: 100px;
+  position: fixed;
+  top:0;
+  left: 50px;
+  top:0px;
+  }
+
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  position: fixed;
+  top:0;
+  right:0;
+}
+
+li{
+  float: left;
+  font-size: 17px; 
+}
+
+ul li a:link, ul li a:visited  {
+  display: block;
+  width: 130px;
+  height: 40px;
+  background-color: #FF8C00;
+  color: white;
+  text-decoration: none;
+  padding-top: 16px;
+  }
+
+ul li a:hover, nav ul li a:active  {
+  background-color: #FF4500;
+  }
+
+.btn{
+  height: 32px;
+  width: 165px;  
+  background-color: #FF8C00;
+  color:white;
+  }
+
+.btn:hover{
+  background-color: #FF4500;
+  }
+
+#email{
+  height: 27px;
+  width: 200px;
+  }
+
+#form{
+  padding: 30px 10px 10px;
+  }
+
+#form-title{
+  padding-bottom: 5px;
+  }
+
+#title{
+  padding: 27px;
+  }
+
+#welcome-section, #about, #pricing, #contact {
+  background: none;
+  min-height: 100vh;
+  width:100vw;
+  }
+
+#welcome-section{
+  padding-top: 45vh;
+  }
+
+#contact-header, #pricing-header, #about-header{
+  text-align: center;
+  padding-top: 130px;
+  padding-bottom: 45px;
+  }
+
+.contactContainer, .prices {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  height: 270px;
+  }
+
+.contactContainer{
+  height: 130px;
+  }
+
+.contBlock, .bold {
+  padding: 5px;
+  font-weight: bold;
+  }
+
+.buy-options{
+  padding: 18px;
+  }
+
+.buy-options-descr{
+  padding-bottom: 5px;
+  }
+
+.links{
+  color: #FF8C00;
+  }
+
+.links:hover{
+  color: #FF4500;
+  }
+
+
+@media only screen and (max-width: 700px) {
+  nav ul {
+    text-align: center;
+  }
+  #work-header, #contact-header{
+  text-align: center;
+  padding-top: 70px;
+  padding-bottom: 10px;
+  }
+}
+
