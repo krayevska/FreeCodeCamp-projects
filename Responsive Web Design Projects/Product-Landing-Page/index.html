@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en" >
+
+<head>
+  <meta charset="UTF-8">
+  <title>Product Landing Page (FCC )</title>
+  
+  
+  
+      <link rel="stylesheet" href="css/style.css">
+
+  
+</head>
+
+<body>
+
+  <!-- 
+https://learn.freecodecamp.org/responsive-web-design/responsive-web-design-projects/build-a-product-landing-page
+-->
+<div class = "whole-page">
+ <header id="header"> 
+  <div id="headerLogo">
+   <div class="logo">
+    <img id="header-img" src="https://www.leb.k12.in.us/cms/lib/IN02200860/Centricity/Domain/284/runningclub.jpg" alt="club logo" width = 100%/>
+   </div>
+  </div> 
+  
+  <nav id='nav-bar'>
+   <ul>
+    <li><a href="#welcome-section" class = "nav-link">Home</a></li>
+    <li><a href="#about" class = "nav-link">About</a></li>
+    <li><a href="#pricing" class = "nav-link">Pricing</a></li>
+    <li><a href="#contact" class = "nav-link">Contact</a></li>
+   </ul>
+  </nav>  
+ </header>
+  
+ <div id="welcome-section" class="homepage">
+  <h1 id ="title">Vynnyky running club</h1> 
+  <p>(<a href = "https://www.freecodecamp.org/"  target="_blank" class = "links">FreeCodeCamp</a> Responsive Web Design project №3, Build a Product Landing Page, by <a href ="https://codepen.io/krayevska/" target="_blank" class = "links">krayevska</a>.)</p> 
+  <form id="form" action="https://www.freecodecamp.com/email-submit">
+   <p id = "form-title">Sing up for our weekly newsletter:</p>
+   <input name="email" id="email" type="email" placeholder="Enter your email address"  style = "font-family: 'Courier', monospace;" required/>
+   <input id="submit" type="submit" value="Sing up" class="btn"  style = "font-family: 'Courier', monospace;"></input>
+  </form>
+ </div>
+
+ <div id="about">
+  <h2 id ="about-header">Video for inspiration:</h2>
+  <iframe id="video" width="420" height="315" src="https://www.youtube.com/embed/d1qnvK3ID_w?autoplay=1">
+  </iframe>
+ </div>
+
+ <div id="pricing">
+  <h2 id="pricing-header">Pricing</h2>
+   <div class = "prices">
+    <div class = "buy-options"> 
+    <div class = "buy-options-descr"> 
+    <p class = "bold"> 500 UAH per month</p>
+    <p>includes:</p> 
+    <p>12 training sessions</p>
+    </div>   
+    <button class = "btn buy-btn" style = "font-family: 'Courier', monospace;">purchase</button>
+   </div> 
+   <div class = "buy-options">  
+    <div class = "buy-options-descr"> 
+    <p class = "bold">4000 UAH per year</p>
+    <p>includes:</p>
+    <p>144 training sessions,</p>
+    <p>club T-shirt</p>
+    </div>   
+    <button class = "btn buy-btn" style = "font-family: 'Courier', monospace;">purchase</button> 
+   </div>   
+  </div>
+  </div> 
+
+ <div id="contact" class="contact">
+  <h2 id="contact-header">Contact us:</h2>
+  <div class = "contactContainer">
+   <div class="contBlock"><a href="https://www.facebook.com/olga.krayevska" target="_blank">facebook</a></div>
+   <div class="contBlock"><p>vynnykyrc@ukr.net</p></div>
+   <div class="contBlock"><p>077-777-77-77</p></div>
+  </div>
+ </div>
+
+ <footer>
+   <span>by <a href = "https://codepen.io/krayevska" class = "links" target="_blank">krayevska</a></span>
+  </footer>
+</div>
+  
+  
+
+</body>
+
+</html>
