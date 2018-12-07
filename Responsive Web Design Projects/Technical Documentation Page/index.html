@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en" >
+
+<head>
+  <meta charset="UTF-8">
+  <title>Technical Documentation Page (FCC )</title>
+  
+  
+  
+      <link rel="stylesheet" href="css/style.css">
+
+  
+</head>
+
+<body>
+
+  <!-- https://learn.freecodecamp.org/responsive-web-design/responsive-web-design-projects/build-a-technical-documentation-page
+http://wiki.c2.com/?PythonIdioms
+-->
+
+<nav id="navbar">
+ <header>Python Idioms</header>
+ <p class = "description">(<a href = "https://www.freecodecamp.org/"  target="_blank" class = "links">FreeCodeCamp</a> Responsive Web Design project №4, Build a Technical Documentation Page, by <a href ="https://codepen.io/krayevska/" target="_blank" class = "links">krayevska</a>.)</p> 
+  <p class = "description">source: <a href = "http://wiki.c2.com/?PythonIdioms"> http://wiki.c2.com/?PythonIdioms</a></p>
+ <ul>
+  <li><a class="nav-link" href = "#expressions">Expressions</a></li>
+  <li><a class="nav-link" href = "#loops">Loops</a></li>
+  <li><a class="nav-link" href = "#functions">Functions</a></li>
+  <li><a class="nav-link" href = "#optimization">Optimization</a></li>
+  <li><a class="nav-link" href = "#others">Others</a></li>
+ </ul>
+</nav>
+
+<main id = "main-doc">
+ <section class="main-section" id="expressions">
+  <header>Expressions</header>
+  <article>
+   <li>Multiple assignment</li> 
+   <code>
+   def find_best(key):
+   ...
+   return new_key, value
+       
+   key, value = find_best(key)
+       
+   a, b = b, a    # swap
+   </code>
+   <li>Interval test</li>
+   <code> 
+   if 2 < x < 4:
+   print "x is between 2 and 4."
+   </code>
+   <li>Set membership test</li>
+   <code>
+   if val in ('foo','bar'):  # or {'foo','bar'}: a set
+   </code>
+   <p>For performance, store the tuple/set in a variable (whose name could be useful documentation), or just do</p>
+   <code>
+   if val=='foo' or val=='bar':
+   </code>
+   <li>Conditional expression</li>
+   <p>What in CeeLanguage is written:</p> 
+   <code> 
+     c ? x : y
+   </code>
+   <p>is in Python (see http://www.python.org/peps/pep-0308.html for history):</p> 
+   <code> 
+     x if c else y  # note order
+   </code> 
+   <p>In Python <2.5, use (if you must) one of:</p> 
+   <code> 
+   c and x or y   # incorrectly returns y if x is (any kind of) false
+   (c and [x] or [y])[0]  # reliable, but ugly and churns objects
+   (x, y)[not c]  # always evaluates both
+   (y, x)[c]      # only if c is really a bool (or otherwise 0 or 1)  
+   </code> 
+  </artice>
+ </section>
+  
+ <section class="main-section" id="loops">
+  <header>Loops</header>
+  <article> 
+    <p class = "subheader">Iterating over a list</p>
+    <code>
+    for f in foo:
+    print f * bar  
+    </code>  
+    <p>not</p>
+    <code>
+    for i in range(len(foo)):
+    print foo[i] * bar  
+    </code>
+    <li>Iterating over the lines in a file</li>
+    <code>
+    with open('foo') as f:     # automatically close f even on exception
+    for line in f:
+    ... 
+    </code>
+    <p>not</p>
+    <code>
+    f=file('foo')                 # synonym for open; see http://mail.python.org/pipermail/python-dev/2004-July/045921.html
+    for line in f.readlines():    # store whole file in memory
+    ...
+    </code>
+    <p>In CPython, the "with" is not so necessary, as dropping the last reference to f will close the file (but that can happen later than you think in case of exceptions).</p>
+    <li>Repeat-until loop</li>
+    <code>
+    while True:
+    ...
+    if test: break
+    ...
+    </code>  
+  </article>
+ </section> 
+ 
+ <section class="main-section" id="functions">
+  <header>Functions</header>
+  <article> 
+   <p class = "subheader">Properties</p> 
+   <p>Rather than getters and setters, simply write</p> 
+   <code>
+   class MyObj(object):
+   def __init__(self): self.foo=0
+   
+   obj=MyObj()
+   obj.foo=4 
+   </code> 
+   <p>You can later make foo a property if logic is necessary:</p> 
+   <code>   
+   class MyObj(object):
+   def __init__(self): self._foo=1  # oops, it has to be odd now
+   @property                   # this is a "decorator"
+   def foo(self): return self._foo
+   @foo.setter
+   def foo(self,x): self._foo=x-x%2+1 # round up to next odd number
+
+   obj=MyObj()
+   obj.foo=4                     # now assigns 5
+   </code>
+   <p class = "subheader">Dispatch tables</p> 
+   <code>
+   disp = { 0: f0, 1: f1, 2: f2, 3: f3 } # dictionary of functions
+   x=disp[n](...)                        # choose and call
+   </code>
+   <p>not</p> 
+   <code>
+   if n==0: x=f0(...)
+   elif n==1: x=f1(...)
+   elif n==2: x=f2(...)
+   elif n==3: x=f3(...)
+   else: raise KeyError(n)       # for symmetry with the above 
+   </code> 
+   <p>(Python has no <a href = "http://wiki.c2.com/?SwitchStatement">SwitchStatement</a>.)</p> 
+  </article> 
+ </section> 
+  
+ <section class="main-section" id="optimization">
+  <header>Optimization</header>
+  <article>
+   <p class = "subheader">Avoid a defensive copy</p>  
+   <p>If a function stores a mutable argument, you might want to copy it to avoid action at a distance:</p>  
+   <code>
+   class A(object):
+    def f(self,l): self.list=l[:]
+   </code>  
+   <p>If it's common for the call to look like:</p>  
+   <code>
+   a=A()
+   a.f([1,2,3])  # no other reference to this list anyway  
+   </code> 
+   <p>(but with a large list that shouldn't be needlessly copied) you can (in CPython) optimize away the copy:</p>
+   <code>
+   import sys
+   class A(object):
+    def f(self,l):
+      if sys.getrefcount(l)>3: l=l[:]
+      self.list=l
+   </code>  
+   <p>The three allowed references are l itself, and its presence in the argument lists of f() and of getrefcount().</p>
+   <p>(This occurred to me just before writing this on June 20 2013; thoughts welcome. -- DavisHerring)</p>  
+  </article> 
+ </section>  
+  
+ <section class="main-section" id="others">
+  <header>Others</header>
+  <article> 
+   <p>The PythonCookbook: ISBN 0596001673 and <a href = "http://aspn.activestate.com/ASPN/Cookbook/Python/">http://aspn.activestate.com/ASPN/Cookbook/Python/</a>, parts of which are written/edited by the illustrious Alex Martelli.</p> 
+    <p>From Monty Python and the Holy Grail:</p>
+    <p>LAUNCELOT: No, no, sweet Concorde! Stay here! I will send help as soon as I have accomplished a daring and heroic rescue in my own particular... [sigh]</p>
+    <p>CONCORDE: Idiom, sir?</p>
+    <p>LAUNCELOT: Idiom!</p>
+    <p>See also <a href = "http://python.net/~goodger/projects/pycon/2007/idiomatic/handout.html">http://python.net/~goodger/projects/pycon/2007/idiomatic/handout.html</a></p>
+  </article> 
+ </section>   
+</main>
+  
+  
+
+</body>
+
+</html>
