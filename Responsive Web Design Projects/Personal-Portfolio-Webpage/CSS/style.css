@@ -1,0 +1,96 @@
+html,
+body {
+  font-family: sans-serif;
+  text-align: center;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+nav ul {
+  text-align: right;
+  position: fixed;
+  width: 100%;
+  background-color: #FFFF98;
+}
+
+nav ul li {
+  display: inline-block;
+  margin: 55px;
+  margin-bottom: 15px;
+  margin-top: 30px;
+  }
+
+nav ul li a {
+  color: green;
+  text-decoration: none;
+}
+
+.homepage {
+  background: #9898FF;
+  min-height: 55vh;
+  padding-top: 45vh;
+  }
+
+.work{
+  background: #FF9898;
+  min-height: 100vh;
+  width:100vw;
+}
+
+#work-header, #contact-header{
+  text-align: center;
+  padding-top: 250px;
+  padding-bottom: 30px;
+  }
+
+.block{
+  margin: auto;
+  margin-top:30px;
+  margin-bottom:30px;
+  width: 500px;
+  height:auto;
+  padding: 10px 0;
+  text-align: center;
+  display: block;
+  }
+
+.contact{
+  background: #98FFCC;
+  min-height: 100vh;
+  width:100vw;
+  }
+
+.contBlock{
+  display: inline-block;
+  margin: 30px 30px 30px 30px; 
+  text-align: center;
+  padding: 10px 0;
+  }
+
+.contaktContainer {
+  text-align: center;
+}
+
+.description{
+  padding: 10px;
+  font-size: 15px;
+}
+
+#description{
+  font-size: 15px;
+}
+
+@media only screen and (max-width: 700px) {
+  nav ul {
+    text-align: center;
+  }
+  
+  #work-header, #contact-header{
+  text-align: center;
+  padding-top: 150px;
+  padding-bottom: 30px;
+  }
+}
