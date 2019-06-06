@@ -1,3 +1,4 @@
+[on Codepen](https://codepen.io/krayevska/full/MdONNe)<br><br>
 [Build a JavaScript Calculator](https://learn.freecodecamp.org/front-end-libraries/front-end-libraries-projects/build-a-javascript-calculator)
 <br>
 -Objective: Build a CodePen.io app that is functionally similar to this: https://codepen.io/freeCodeCamp/full/wgGVVX.<br>
