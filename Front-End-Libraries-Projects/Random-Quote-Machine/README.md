@@ -1,3 +1,4 @@
+[on Codepen](https://codepen.io/krayevska/full/GLoBzN)<br><br>
 [Build a Random Quote Machine](https://learn.freecodecamp.org/front-end-libraries/front-end-libraries-projects/build-a-random-quote-machine)<br>
 Objective: Build a CodePen.io app that is functionally similar to this: https://codepen.io/freeCodeCamp/full/qRZeGZ.<br>
 Fulfill the below user stories and get all of the tests to pass. Give it your own personal style.<br>
