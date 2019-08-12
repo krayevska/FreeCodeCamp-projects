@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+  <meta charset="UTF-8">
+  <title>PomodoroClock (FCC, vanilla js)</title>
+  <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.1/css/bootstrap.css'>
+<link rel="stylesheet" href="./style.css">
+</head>
+<body>
+<!-- partial:index.partial.html -->
+<div class="grid-container">
+   <div class="grid-item first-row container">
+     <div class = 'appNames'>Pomodoro Clock</div>
+     <a class = 'about' href = 'https://en.wikipedia.org/wiki/Pomodoro_Technique' target = '_blank'>about</a>
+     
+     </div>
+  <div class="grid-item"></div>
+  <div id = "session-label" class="grid-item change-item container change-item-work">
+     Time of work
+       <br>
+     <button class = "change plus" id="moreMinutes">+</button>
+     <span id = 'curMinW'></span>
+      <button class = "change minus" id="lessMinutes">-</button>
+      </div>  
+     
+   <div class="grid-item timerItem" >
+    <div id="pomodoro-app">
+     <div class ="container">
+     <div id="timer">
+      <div id="time">
+        <span id="minutesHtml">25</span>
+        <span>:</span>
+        <span id="secondsHtml">00</span>
+      </div>
+      <div id="filler"></div>
+    </div>
+    <br>
+    <div id="buttons">
+      <button id="work">Work</button>
+      <button id="break">Break</button>
+      <button id="stop">Stop</button>
+      </div>
+      </div>
+      </div>
+     </div>
+    <div id = "break-label" class="grid-item change-item container">
+     Time of break
+     <br>
+     <button class = "change plus" id="moreMinutesBr">+</button>
+     <span id = 'curMinB'></span>
+     <button class = "change minus" id="lessMinutesBr">-</button>
+    </div>
+  <div class="grid-item"></div>
+  <div class="grid-item last-row"><div id = 'fcc'>freecodecamp.org advanced front end development project#2, by <a id = 'k' href = 'https://codepen.io/krayevska/' target = '_blank'> krayevska</a></div></div>
+  </div>
+<!-- partial -->
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js'></script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-beta.3/js/bootstrap.js'></script>
+<script  src="./script.js"></script>
+
+</body>
+</html>
