@@ -1,0 +1,251 @@
+/*
+Dependencies: React, ReactDOM, and 
+Accurate_Interval.js by Squuege:
+https://codepen.io/no_stack_dub_sack/pen/VKJGKd
+*/
+
+const projectName = 'pomodoro-clock';
+class PomodoroClock extends React.Component {
+ constructor(props) {
+    super(props);
+    this.state = {
+    label: 'Session',
+    startPauseMode: 'paused',   
+    workLength: 25, 
+    breakLength: 5, 
+    timeLeft: 1500,
+    timerFunction: '',  
+    timerMode: 'off',
+    startPauseModeColor: 'green',
+    startPauseModeLabel: 'Start'
+    }
+   
+   this.moreWork = this.moreWork.bind(this);
+   this.lessWork = this.lessWork.bind(this);
+   this.moreBreak = this.moreBreak.bind(this);
+   this.lessBreak = this.lessBreak.bind(this); 
+   this.reset = this.reset.bind(this); 
+   this.startPause = this.startPause.bind(this);
+   this.clockFormat = this.clockFormat.bind(this);
+   this.ticking = this.ticking.bind(this);
+   this.startTimer = this.startTimer.bind(this);
+   }
+  
+  clockFormat(){
+    let m = Math.floor(this.state.timeLeft / 60);
+    let s = this.state.timeLeft - m * 60;
+    s = s < 10 ? '0' + s : s;
+    m = m < 10 ? '0' + m : m;
+    return m + ':' + s;
+  }
+     
+  startTimer(){  
+     this.setState({
+      timerMode: 'on',  
+      timerFunction: accurateInterval(() => {
+       this.ticking();
+      }, 1000)})
+     }
+  
+  ticking(){
+    let audio = document.getElementById("beep");
+    if(this.state.label == 'Session' && this.state.timeLeft > 0){
+     this.setState({timeLeft: this.state.timeLeft - 1});
+     }
+    else if(this.state.label == 'Session' && this.state.timeLeft == 0){
+       this.setState({
+        label: 'Break',
+        timeLeft: this.state.breakLength * 60
+      });
+      audio.play();
+     }
+    else if(this.state.label == 'Break' && this.state.timeLeft > 0) {
+      this.setState({timeLeft: this.state.timeLeft - 1});
+    }
+    else if(this.state.label == 'Break' && this.state.timeLeft == 0) {
+      this.state.timerFunction && this.state.timerFunction.cancel();
+      this.setState({
+      label: 'Session',
+      timeLeft: 1500,
+      workLength: 25, 
+      breakLength: 5,
+      timerMode: 'off',
+      timerFunction: ''
+    
+    });
+      audio.play();
+      this.startTimer();
+    }}
+     
+    moreWork(){
+     if(this.state.workLength < 60 && this.state.timerMode == 'off'){ 
+     this.setState({
+      workLength: this.state.workLength + 1,
+      timeLeft: this.state.timeLeft + 60 
+     });
+   }}
+  
+    lessWork(){
+     if(this.state.workLength > 1 && this.state.timerMode == 'off'){ 
+     this.setState({
+      workLength: this.state.workLength - 1,
+      timeLeft:  this.state.timeLeft -60
+     });
+  }}
+  
+  lessBreak(){
+     if(this.state.breakLength > 1 && this.state.timerMode == 'off'){
+      this.setState({
+      breakLength: this.state.breakLength - 1
+     }); 
+     }}
+  
+  moreBreak(){
+    if(this.state.breakLength < 60 && this.state.timerMode == 'off'){
+     this.setState({
+      breakLength: this.state.breakLength + 1
+      })
+    }}
+     
+ reset(){
+   let audio = document.getElementById("beep");
+   this.setState({
+      label: 'Session',
+      workLength: 25,
+      breakLength: 5, 
+      timeLeft: 1500,
+      startPauseMode: 'paused',
+      timerFunction: '',
+      timerMode: 'off',
+      startPauseModeColor: 'green',
+      startPauseModeLabel: 'Start'
+    });
+    this.state.timerFunction && this.state.timerFunction.cancel();
+    audio.pause();
+    audio.currentTime = 0;
+  } 
+   
+  startPause(){
+   if(this.state.startPauseMode == 'paused' || this.state.timerMode == 'off'){
+    this.startTimer();
+    this.setState({
+      startPauseMode: 'started',
+      startPauseModeColor: 'red',
+      startPauseModeLabel: 'Pause'
+    });
+    }
+    else if(this.state.startPauseMode == 'started'){
+      this.state.timerFunction && this.state.timerFunction.cancel();
+      this.setState({
+        startPauseMode: 'paused',
+        startPauseModeColor: 'green',
+        startPauseModeLabel: 'Start'});
+    }
+   }
+    
+  render() {
+     return (
+       <div className="grid-container">
+         <Header label={this.state.label} />
+         <SessionLabel lengthM={this.state.workLength} 
+                       onClickMoreWork = {this.moreWork}  
+                       onClickLessWork = {this.lessWork}
+                       />       
+                        
+         <Timer startPause = {this.startPause}
+                reset = {this.reset}
+                clockFormat = {this.clockFormat()}
+                startPauseColor = {this.state.startPauseModeColor}
+                startPauseLabel = {this.state.startPauseModeLabel}
+                />   
+         
+         <BreakLabel lengthM={this.state.breakLength} 
+                     onClickMoreBreak = {this.moreBreak}
+                     onClickLessBreak = {this.lessBreak}/>
+         <Footer />    
+     </div>
+     )
+  }
+}
+
+class Header extends React.Component {
+  render(){
+    return (
+      <div className="firstRow container">
+       <div className = 'appNames'>Pomodoro Clock</div>
+       <div><h3 id="timer-label">{this.props.label}</h3></div> 
+      </div>
+)};
+}
+
+class SessionLabel extends React.Component {
+  render(){
+    return (
+      <div id = "session-label" class="changeItem container changeItemWork">
+     Time of work
+       <br/>
+     <button className = "change plus" id="session-increment" onClick={this.props.onClickMoreWork}>+</button>
+     <span id="session-length">{this.props.lengthM}</span>
+      <button className = "change minus" id="session-decrement" onClick={this.props.onClickLessWork}>-</button>
+      </div>  
+)};
+}
+
+class Timer extends React.Component {
+  render(){
+    return (
+      <div className="timerItem" >
+    <div id="pomodoro-app">
+     <div className ="container">
+     <div id="timer">
+      <div id="time-left" class="time">
+      {this.props.clockFormat} 
+      </div>
+     </div>
+    <br/>
+    <div class="buttons">
+      <button id="start_stop" onClick = {this.props.startPause} style = {{backgroundColor:   this.props.startPauseColor}}>{this.props.startPauseLabel}</button>
+      <button id="reset" onClick = {this.props.reset}>Reset</button>
+      </div>
+      </div>
+      </div>
+     </div>
+  )};
+}
+
+class BreakLabel extends React.Component {
+  render(){
+    return (
+      <div id = "break-label" class="changeItem container changeItemBreak">
+     Time of break
+     <br/>
+     <button className = "change plus" id="break-increment" onClick = {this.props.onClickMoreBreak}>+</button>
+     <span id="break-length" >{this.props.lengthM}</span>
+     <button className = "change minus" id="break-decrement" onClick = {this.props.onClickLessBreak}>-</button>
+    </div>  
+)};
+}
+
+class Footer extends React.Component {
+  render(){
+    return (
+      <div className="lastRow container">
+      <div ><div>freecodecamp.org advanced front end development project#2<br /> by<a href = 'https://codepen.io/krayevska/' target = '_blank'> krayevska</a>
+       <br /> 
+        more about <a href = 'https://en.wikipedia.org/wiki/Pomodoro_Technique' target = '_blank'>pomodoro technique</a>
+        </div>
+        </div>
+      
+      <div>
+        <audio id="beep" preload="auto" 
+          src="https://goo.gl/65cBl1"
+          ref={(audio) => { this.audioBeep = audio; }} />
+      </div>
+      </div>
+  )};
+}
+
+ReactDOM.render(<PomodoroClock />, document.getElementById('root'));
+  
+
+  
