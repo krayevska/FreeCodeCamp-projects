@@ -238,7 +238,7 @@ class Footer extends React.Component {
 
       React.createElement("div", null,
       React.createElement("audio", { id: "beep", preload: "auto",
-        src: "https://goo.gl/65cBl1",
+        src: "http://soundbible.com/mp3/Fire_pager-jason-1283464858.mp3",
         ref: audio => {this.audioBeep = audio;} }))));
 
 
