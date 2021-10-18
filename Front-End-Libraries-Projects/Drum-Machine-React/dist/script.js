@@ -1,103 +1,102 @@
-const renderer = new marked.Renderer();
+/*
+https://www.freecodecamp.org/learn/front-end-libraries/front-end-libraries-projects/build-a-drum-machine
+*/
+const projectName = 'javascript-drum-machine',
+      drumKit = [
+        {name: 'Heater-1', key: 'Q', src: 'https://s3.amazonaws.com/freecodecamp/drums/Heater-1.mp3'},
+        {name: 'Heater-2', key: 'W', src: 'https://s3.amazonaws.com/freecodecamp/drums/Heater-2.mp3'},
+        {name: 'Heater-3', key: 'E', src: 'https://s3.amazonaws.com/freecodecamp/drums/Heater-3.mp3'},
+        {name: 'Heater-4', key: 'A', src: 'https://s3.amazonaws.com/freecodecamp/drums/Heater-4_1.mp3'},
+        {name: 'Clap', key: 'S', src: 'https://s3.amazonaws.com/freecodecamp/drums/Heater-6.mp3'},
+        {name: 'Open-HH', key: 'D', src: 'https://s3.amazonaws.com/freecodecamp/drums/Dsc_Oh.mp3'},
+        {name: "Kick-'n-Hat", key: 'Z', src: 'https://s3.amazonaws.com/freecodecamp/drums/Kick_n_Hat.mp3'},
+        {name: 'Kick', key: 'X', src: 'https://s3.amazonaws.com/freecodecamp/drums/RP4_KICK_1.mp3'},
+        {name: 'Closed-HH', key: 'C', src: 'https://s3.amazonaws.com/freecodecamp/drums/Cev_H2.mp3'}
+      ]
 
-renderer.link = function (href, title, text) {
-  const link = marked.Renderer.prototype.link.call(this, href, title, text);
-  return link.replace("<a", "<a target='_blank' ");
-};
-
-marked.setOptions({
-  breaks: true,
-  renderer: renderer,
-  sanitize: true });
-
-
-
-class MarkdownPreviewer extends React.Component {
+class KeyBoard extends React.Component {
+  
+  componentDidMount() {
+    document.addEventListener('keydown', this.keyIsDown)
+    window.focus()
+  }
+  
+  componentWillUnmount() {
+    document.removeEventListener('keydown', this.keyIsDown)
+  }
+  
+  keyIsDown = e => {
+    if(e.keyCode === this.props.letter.charCodeAt()) {
+       this.play()
+    }
+  }
+  
+  play = () => {
+    this.audio.play()
+    this.audio.currentTime = 0
+    this.props.updateDisplay(this.props.id)
+  }
+    
+  render(){
+    return (
+      <div 
+        className="drum-pad" 
+        id={this.props.id}
+        onClick={this.play} 
+      >
+          {this.props.letter}
+          <audio 
+            className="clip" 
+            ref={ref => this.audio = ref} 
+            id={this.props.letter} 
+            src={this.props.src}>
+          </audio>
+      </div>
+    );
+  }
+}
+   
+class DrumMachine extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      input: placeholder };
-
-    this.getInput = this.getInput.bind(this);
-    this.convertToMarkdown = this.convertToMarkdown.bind(this);
-  }
-
-  convertToMarkdown() {
-    let mrkdn = marked(this.state.input);
-    return { __html: mrkdn };
-  }
-
-  getInput(e) {
-    let newInput = e.target.value;
-    this.setState({ input: newInput });
-  }
-
-  render() {
-    return (
-      React.createElement("div", { className: "container" },
-      React.createElement("div", { className: "box" },
-      React.createElement("h2", null, "Markdown:"),
-      React.createElement("textarea", { id: "editor",
-        value: this.state.input,
-        onChange: this.getInput })),
-
-
-      React.createElement("div", { className: "box" },
-      React.createElement("h2", null, "Preview:"),
-      React.createElement("div", { id: "preview", dangerouslySetInnerHTML: this.convertToMarkdown() }))));
-
-
-
-  }}
-
-
-
-const placeholder =
-`# Welcome to my React Markdown Previewer!
-
-  ## This is a sub-heading...
-  ### And here's some other cool stuff:
-    
-  Heres some code, \`<div></div>\`, between 2 backticks.
-
-  \`\`\`
-  // this is multi-line code:
-
-  function anotherExample(firstLine, lastLine) {
-    if (firstLine == '\`\`\`' && lastLine == '\`\`\`') {
-      return multiLineCode;
+      name: 'click a button or press a key'
     }
   }
-  \`\`\`
+  
+  updateDisplay = name => this.setState({ name: name })
     
-  You can also make text **bold**... whoa!
-  Or _italic_.
-  Or... wait for it... **_both!_**
-  And feel free to go crazy ~~crossing stuff out~~.
+  render() {
+    return (
+      <div>
+      <h2>JavaScript Drum Machine.</h2> 
+      <div id="drum-machine">
+        <div id='drum-pads'>
+          {drumKit.map(i => (
+            <KeyBoard
+              id={i.name}
+              letter={i.key}
+              src={i.src}
+              updateDisplay={this.updateDisplay}
+            />  
+          ))} 
+        </div>
+        <div id='display'>{this.state.name}</div> 
+      </div>
+      <br />  
+      <div id="codedBy">
+        <a target="_blank" href= 'https://www.freecodecamp.org/'>FreeCodeCamp </a> 
+        Front End Libraries Project 
+        <br /> 
+        designed and coded by 
+        <a target="_blank" href="https://codepen.io/krayevska"> Olga Krayevska</a>
+      </div>
+    </div>
+    )
+  }
+}
 
-  There's also [links](https://www.freecodecamp.com), and
-   > Block Quotes!
-
-  And if you want to get really crazy, even tables:
-
-  Wild Header | Crazy Header | Another Header?
-  ------------ | ------------- | ------------- 
-  Your content can | be here, and it | can be here....
-  And here. | Okay. | I think we get it.
-
-  - And of course there are lists.
-    - Some are bulleted.
-        - With different indentation levels.
-          - That look like this.
+ReactDOM.render(<DrumMachine />, document.getElementById('root'));
 
 
-  1. And there are numbererd lists too.
-  1. Use just 1s if you want! 
-  1. But the list goes on...
-  - Even if you use dashes or asterisks.
-  * And last but not least, let's not forget embedded images:
 
-  ![React Logo w/ Text](https://goo.gl/Umyytc)
-  `;
-
-ReactDOM.render(React.createElement(MarkdownPreviewer, null), document.getElementById('MarkdownPreviewer'));
