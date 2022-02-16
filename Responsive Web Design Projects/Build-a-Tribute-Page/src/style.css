@@ -1,0 +1,15 @@
+.image{
+   display: block;
+   margin: auto;
+   }
+
+.text {
+   text-align: center;
+   /*border: 3px solid green;*/
+   }
+.table {
+ /*border: 3px solid green;*/
+  margin-top:20px;
+}
+
+
